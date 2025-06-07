@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Petite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FFD700;
+            --primary-dark: #FFC000;
+            --secondary: #1A1A1A;
+            --text-light: #FFFFFF;
+            --text-dark: #333333;
+            --background: #000000;
+            --card-bg: #111111;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .heading-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        /* Menu Sections */
+        .menu-section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .menu-section:nth-child(even) {
+            background-color: rgba(255, 215, 0, 0.05);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background-color: var(--card-bg);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .menu-item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .menu-item-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .menu-item-price {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .menu-item-description {
+            color: var(--text-light);
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .buy-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #25D366;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        .buy-button:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        .buy-button i {
+            font-size: 1.25rem;
+        }
+
+        .tag {
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .tag-spicy {
+            background-color: rgba(255, 0, 0, 0.1);
+            color: #ff4444;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--secondary);
+            padding: 4rem 0;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-light);
+            opacity: 0.6;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Update cart button styles */
+        .cart-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            background-color: #FFD700;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease-in-out;
+            z-index: 100;
+        }
+
+        .cart-button:hover {
+            transform: scale(1.05);
+        }
+
+        .cart-button svg {
+            width: 1.75rem;
+            height: 1.75rem;
+            color: #000000;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -0.5rem;
+            right: -0.5rem;
+            background-color: #EF4444;
+            color: white;
+            border-radius: 50%;
+            width: 1.5rem;
+            height: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border: 2px solid white;
+        }
+
+        @media (max-width: 640px) {
+            .cart-button {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 3rem;
+                height: 3rem;
+            }
+
+            .cart-button svg {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+
+            .cart-count {
+                width: 1.25rem;
+                height: 1.25rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Add new styles for the ordering system */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .cart-items {
+            margin: 1rem 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: #f3f4f6;
+            border: none;
+            border-radius: 0.25rem;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .notes-field {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 1rem 0;
+            border: 1px solid #ddd;
+            border-radius: 0.25rem;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .cart-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .continue-shopping {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .checkout-btn {
+            background: #10b981;
+            color: white;
+        }
+
+        .cart-btn:hover {
+            opacity: 0.9;
+        }
+
+        .cart-total {
+            font-weight: bold;
+            text-align: right;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #eee;
+        }
+
+        .menu-item {
+            position: relative;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .quantity-display {
+            min-width: 2rem;
+            text-align: center;
+        }
+
+        .cart-item-details h4 {
+            color: #000000; /* Black color for item name */
+        }
+
+        .cart-item-details p {
+            color: #333333; /* Dark gray for item price */
+        }
+
+        .cart-item-quantity span {
+            color: #000000; /* Black color for quantity display in modal */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="../images/lapetite-logo.png" alt="La Petite Logo">
+            </a>
+            <div class="nav-links">
+                <a href="#tacos" class="nav-link">Tacos</a>
+                <a href="#pizzas" class="nav-link">Pizzas</a>
+                <a href="#sandwiches" class="nav-link">Sandwiches</a>
+                <a href="#pastichio" class="nav-link">Pastichio</a>
+                <a href="#burgers" class="nav-link">Burgers</a>
+                <a href="#salads" class="nav-link">Salades</a>
+                <a href="#fries" class="nav-link">Accompagnements</a>
+                <a href="#juices" class="nav-link">Jus</a>
+                <a href="#milkshakes" class="nav-link">Milkshakes</a>
+                <a href="#desserts" class="nav-link">Desserts</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="../images/lapetite-logo.png" alt="La Petite Logo" style="height: 200px; width: auto;">
+        </div>
+    </section>
+
+    <!-- Menu Sections -->
+    <div id="menu-sections">
+        <!-- Sections will be populated by JavaScript -->
+    </div>
+
+    <!-- Cart Button -->
+    <button id="cartButton" class="cart-button" aria-label="Ouvrir le panier" title="Voir votre commande">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+        <span id="cartCount" class="cart-count">0</span>
+    </button>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>Votre Commande</h2>
+                <button onclick="closeCartModal()" class="close-btn">&times;</button>
+            </div>
+            <div id="cartItems" class="cart-items">
+                <!-- Cart items will be inserted here -->
+            </div>
+            <textarea id="orderNotes" class="notes-field" placeholder="Ajoutez des notes spéciales (ex: extra fromage, sans oignons, sauce harissa...)"></textarea>
+            <div id="cartTotal" class="cart-total">
+                Total: 0.00 MAD
+            </div>
+            <div class="cart-actions">
+                <button onclick="closeCartModal()" class="cart-btn continue-shopping">Continuer les achats</button>
+                <button onclick="sendOrder()" class="cart-btn checkout-btn">Commander</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>La Petite</h3>
+                <p>Rue Youssef Ben Tachfin, Ouedzem</p>
+                <p>Rue des Martyrsese 22, Ouedzem</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/lapetite_oz" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/212696673802" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 La Petite</p>
+        </div>
+    </footer>
+
+    <!-- Load data.js first -->
+    <script src="../data/menu.js"></script>
+    
+    <!-- Main script -->
+    <script>
+        let cart = [];
+        const cartButton = document.getElementById('cartButton');
+        const cartCount = document.getElementById('cartCount');
+        const cartModal = document.getElementById('cartModal');
+
+        // Function to create menu item card
+        function createMenuItemCard(item) {
+            return `
+                <div class="menu-item">
+                    <img src="${item.image}" alt="${item.name}" class="menu-item-image">
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">${item.name}</h3>
+                            <span class="menu-item-price">${item.price.toFixed(2)} MAD</span>
+                        </div>
+                        <p class="menu-item-description">${item.description}</p>
+                        <div class="quantity-control">
+                            <button class="quantity-btn" onclick="decreaseQuantity('${item.id}')">-</button>
+                            <span class="quantity-display" id="quantity-${item.id}">0</span>
+                            <button class="quantity-btn" onclick="increaseQuantity('${item.id}')">+</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to create menu section
+        function createMenuSection(category) {
+            return `
+                <section id="${category.id}" class="menu-section">
+                    <div class="section-container">
+                        <div class="section-header">
+                            <h2 class="section-title">${category.name}</h2>
+                        </div>
+                        <div class="menu-grid">
+                            ${category.items.map(item => createMenuItemCard(item)).join('')}
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        // Cart functions
+        function increaseQuantity(itemId) {
+            const item = findItemById(itemId);
+            const cartItem = cart.find(i => i.id === itemId);
+            
+            if (cartItem) {
+                cartItem.quantity++;
+            } else {
+                cart.push({ ...item, quantity: 1 });
+            }
+            
+            // Re-update all quantity displays on the main menu to ensure consistency
+            menuData.categories.forEach(category => {
+                category.items.forEach(menuItem => {
+                    updateQuantityDisplay(menuItem.id);
+                });
+            });
+            updateCartCount();
+            
+            // If cart modal is open, re-open it to refresh display
+            if (cartModal.style.display === 'flex') {
+                openCartModal();
+            }
+        }
+
+        function decreaseQuantity(itemId) {
+            const cartItem = cart.find(i => i.id === itemId);
+            
+            if (cartItem) {
+                cartItem.quantity--;
+                if (cartItem.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== itemId);
+                }
+            }
+            
+            // Re-update all quantity displays on the main menu to ensure consistency
+            menuData.categories.forEach(category => {
+                category.items.forEach(menuItem => {
+                    updateQuantityDisplay(menuItem.id);
+                });
+            });
+            updateCartCount();
+            
+            // If cart modal is open, re-open it to refresh display
+            if (cartModal.style.display === 'flex') {
+                openCartModal();
+            }
+        }
+
+        function updateQuantityDisplay(itemId) {
+            const display = document.getElementById(`quantity-${itemId}`);
+            const cartItem = cart.find(i => i.id === itemId);
+            if (display) { // Check if display element exists on the main menu
+                display.textContent = cartItem ? cartItem.quantity : '0';
+            }
+            // The cart modal items are re-rendered by openCartModal, so no need to update individual quantity displays here.
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = count;
+        }
+
+        function findItemById(itemId) {
+            for (const category of menuData.categories) {
+                const item = category.items.find(i => i.id === itemId);
+                if (item) return item;
+            }
+            return null;
+        }
+
+        function openCartModal() {
+            if (cart.length === 0) {
+                closeCartModal(); // Close modal if cart is empty
+                return;
+            }
+            
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartTotalDisplay = document.getElementById('cartTotal');
+            let total = 0;
+            
+            // Clear previous content
+            cartItemsContainer.innerHTML = '';
+
+            const cartItemsHtml = cart.map(item => {
+                // Defensive check: ensure item and its properties are valid
+                if (!item || typeof item.name === 'undefined' || typeof item.price === 'undefined' || typeof item.quantity === 'undefined' || typeof item.id === 'undefined') {
+                    console.error('Invalid item in cart:', item);
+                    return ''; // Skip rendering this invalid item
+                }
+
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p>${item.price.toFixed(2)} MAD</p>
+                        </div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn" onclick="decreaseQuantity('${item.id}')">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn" onclick="increaseQuantity('${item.id}')">+</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            cartItemsContainer.innerHTML = cartItemsHtml;
+            cartTotalDisplay.textContent = `Total: ${total.toFixed(2)} MAD`;
+            cartModal.style.display = 'flex';
+
+            // For debugging: Log cart content and rendered HTML
+            console.log('Current cart:', cart);
+            console.log('Rendered cart items HTML:', cartItemsHtml);
+        }
+
+        function closeCartModal() {
+            cartModal.style.display = 'none';
+        }
+
+        function sendOrder() {
+            if (cart.length === 0) return;
+
+            const phoneNumber = '212619028044';
+            const notes = document.getElementById('orderNotes').value;
+            
+            let message = "✅ *Commande de La Petite*\n\n";
+            message += "*Détails de la commande:*\n";
+            
+            let total = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                message += `• ${item.quantity}x ${item.name} - ${itemTotal.toFixed(2)} MAD\n`;
+            });
+            
+            message += `\n💰 *Total: ${total.toFixed(2)} MAD*\n`;
+            
+            if (notes) {
+                message += `\n📝 *Note:* ${notes}\n`;
+            }
+            
+            message += "\n📍 *Point de retrait:* Lapetite 1 - Rue Youssef Ben Tachfin, Ouedzem";
+            message += "\n\nMerci de votre commande! 🎉";
+
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Reset cart and close modal
+            cart = [];
+            document.getElementById('orderNotes').value = '';
+            updateCartCount();
+            closeCartModal();
+            
+            // Reset all quantity displays
+            menuData.categories.forEach(category => {
+                category.items.forEach(item => {
+                    updateQuantityDisplay(item.id);
+                });
+            });
+        }
+
+        // Initialize cart button
+        cartButton.addEventListener('click', openCartModal);
+
+        // Close modal when clicking outside
+        cartModal.addEventListener('click', (e) => {
+            if (e.target === cartModal) {
+                closeCartModal();
+            }
+        });
+
+        // Load menu data and create sections
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuSections = document.getElementById('menu-sections');
+            if (typeof menuData !== 'undefined' && menuData.categories) {
+                menuData.categories.forEach(category => {
+                    menuSections.innerHTML += createMenuSection(category);
+                });
+            } else {
+                console.error('Menu data not loaded properly');
+                menuSections.innerHTML = '<div class="text-center text-red-500">Erreur de chargement du menu</div>';
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
